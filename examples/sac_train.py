@@ -34,9 +34,9 @@ def build_and_train(env_id="DressingPR2-v0", run_ID=0, cuda_idx=None, sample_mod
         batch_T=1,  # 5 time-steps per sampler iteration.
         batch_B=40,  # 16 parallel environments.
         max_decorrelation_steps=20,
-        eval_n_envs=10,
-        eval_max_steps=int(1e2),
-        eval_max_trajectories=10,
+        eval_n_envs=20,
+        eval_max_steps=int(1e3),
+        eval_max_trajectories=20,
     )
     algo = SAC()  # Run with defaults.
     agent = SacAgent()
@@ -44,7 +44,7 @@ def build_and_train(env_id="DressingPR2-v0", run_ID=0, cuda_idx=None, sample_mod
         algo=algo,
         agent=agent,
         sampler=sampler,
-        n_steps=1e6,
+        n_steps=2e6,
         log_interval_steps=1e4,
         affinity=affinity,
     )
@@ -61,7 +61,7 @@ def build_and_train(env_id="DressingPR2-v0", run_ID=0, cuda_idx=None, sample_mod
     config = dict(env_id=env_id)
     name = "sac_" + env_id
     log_dir = "robotic_dressing_experiments"
-    with logger_context(log_dir, run_ID, name, config):
+    with logger_context(log_dir, run_ID, name, config, snapshot_mode="all"):
         runner.train()
 
 
