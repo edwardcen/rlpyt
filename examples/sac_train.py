@@ -32,7 +32,7 @@ def build_and_train(env_id="DressingPR2-v0", run_ID=0, cuda_idx=None, sample_mod
         env_kwargs=dict(id=env_id),
         eval_env_kwargs=dict(id=env_id),
         batch_T=1,  # 5 time-steps per sampler iteration.
-        batch_B=8,  # 16 parallel environments.
+        batch_B=40,  # 16 parallel environments.
         max_decorrelation_steps=20,
         eval_n_envs=10,
         eval_max_steps=int(1e2),
